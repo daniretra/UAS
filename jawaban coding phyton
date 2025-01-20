@@ -1,0 +1,55 @@
+# Program Python untuk representasi pengetahuan dari pohon keluarga di pohon 1
+
+class Person:
+    def __init__(self, name, parent=None):
+        self.name = name
+        self.parent = parent
+        self.children = []
+
+        if parent:
+            parent.children.append(self)
+
+    def get_grandparents(self):
+        if self.parent:
+            return [self.parent.parent] if self.parent.parent else []
+        return []
+
+    def get_siblings(self):
+        if not self.parent:
+            return []
+        return [child for child in self.parent.children if child != self]
+
+    def get_aunts_and_uncles(self):
+        if not self.parent or not self.parent.parent:
+            return []
+        return [child for child in self.parent.parent.children if child != self.parent]
+
+    def get_cousins(self):
+        aunts_and_uncles = self.get_aunts_and_uncles()
+        cousins = []
+        for relative in aunts_and_uncles:
+            cousins.extend(relative.children)
+        return cousins
+
+# Membuat pohon keluarga berdasarkan pohon 1
+# Contoh data (ganti dengan data spesifik dari pohon 1)
+kakek = Person("Kakek")
+nenek = Person("Nenek")
+ayah = Person("Ayah", parent=kakek)
+bibi = Person("Bibi", parent=kakek)
+paman = Person("Paman", parent=kakek)
+saya = Person("Saya", parent=ayah)
+saudara_laki = Person("Saudara Laki-Laki", parent=ayah)
+saudara_perempuan = Person("Saudara Perempuan", parent=ayah)
+sepupu1 = Person("Sepupu 1", parent=bibi)
+sepupu2 = Person("Sepupu 2", parent=paman)
+
+# Contoh representasi pengetahuan
+print("Nama Saya:", saya.name)
+print("Orang Tua:", saya.parent.name if saya.parent else "Tidak ada")
+print("Kakek-Nenek:", [gp.name for gp in saya.get_grandparents()])
+print("Saudara Kandung:", [sibling.name for sibling in saya.get_siblings()])
+print("Paman dan Bibi:", [relative.name for relative in saya.get_aunts_and_uncles()])
+print("Sepupu:", [cousin.name for cousin in saya.get_cousins()])
+
+# Program ini dapat diperluas dengan mengganti nama atau menambahkan logika sesuai instruksi.
