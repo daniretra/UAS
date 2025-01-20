@@ -1,0 +1,8 @@
+Mengubah nama pada pohon 1 berdasarkan digit NIM:
+
+Digit ke-8 dari NIM di pohon 2 mengganti nama depan mahasiswa di pohon 1.
+Digit ke-7 dari NIM di pohon 2 mengganti nama tengah mahasiswa di pohon 1.
+Nama lain di pohon 1 tetap sama.
+
+Membuat representasi pengetahuan:
+Menggunakan pohon keluarga dari pohon 1 untuk relasi: orang tua, saudara laki-laki/perempuan, paman, bibi, kakek, nenek, dan sepupu.
